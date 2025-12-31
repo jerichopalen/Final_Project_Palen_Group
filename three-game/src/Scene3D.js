@@ -465,7 +465,7 @@ export class Scene3D {
       console.log(`moveToken called: from ${currentSquare} to ${toSquare}`);
       
       // If no movement needed, resolve immediately
-      if (toSquare <= currentSquare) {
+      if (toSquare === currentSquare) {
         console.log(`No movement needed.`);
         resolve();
         return;
@@ -473,15 +473,22 @@ export class Scene3D {
 
       let currentMoveSquare = currentSquare;
       const stepDelay = 600; // 0.6 seconds between each step
+      const direction = toSquare > currentSquare ? 1 : -1; // Determine direction: forward or backward
       
       const moveNextSquare = async () => {
-        if (currentMoveSquare >= toSquare) {
+        // Check if we've reached the target
+        if (direction > 0 && currentMoveSquare >= toSquare) {
+          console.log(`Movement complete at square ${token.userData.squareNumber}`);
+          resolve();
+          return;
+        }
+        if (direction < 0 && currentMoveSquare <= toSquare) {
           console.log(`Movement complete at square ${token.userData.squareNumber}`);
           resolve();
           return;
         }
 
-        currentMoveSquare++;
+        currentMoveSquare += direction; // Move forward or backward
         console.log(`Moving to square ${currentMoveSquare}`);
         
         const fromPos = token.position.clone();
