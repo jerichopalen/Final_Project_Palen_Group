@@ -153,32 +153,25 @@ window.rollDice = async function() {
     for (let sq = tokenCurrentSquare + 1; sq <= 100; sq++) {
       soundManager.playCoinSound();
       await scene3D.moveToken(token, sq);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay between steps
     }
     
     // Move step-by-step back from 100 to bounce position
+    console.log(`Moving back step-by-step from 100 to ${bounceBackSquare}`);
     for (let sq = 99; sq >= bounceBackSquare; sq--) {
       soundManager.playCoinSound();
       await scene3D.moveToken(token, sq);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay between steps
     }
     
     landingSquare = bounceBackSquare;
   } else {
     // Normal movement - move step-by-step to landing square
-    if (result.message.includes('Snake') || result.message.includes('Ladder')) {
-      // Move step-by-step to snake head or ladder base
-      console.log(`Moving step-by-step to ${landingSquare}`);
-      for (let sq = tokenCurrentSquare + 1; sq <= landingSquare; sq++) {
-        soundManager.playCoinSound();
-        await scene3D.moveToken(token, sq);
-      }
-    } else {
-      // Regular move without snake/ladder - move step-by-step
-      console.log(`Moving step-by-step from ${tokenCurrentSquare} to ${result.position} (${rolledValue} squares)`);
-      for (let sq = tokenCurrentSquare + 1; sq <= result.position; sq++) {
-        soundManager.playCoinSound();
-        await scene3D.moveToken(token, sq);
-      }
-      landingSquare = result.position;
+    console.log(`Moving step-by-step from ${tokenCurrentSquare} to ${landingSquare} (${rolledValue} squares)`);
+    for (let sq = tokenCurrentSquare + 1; sq <= landingSquare; sq++) {
+      soundManager.playCoinSound();
+      await scene3D.moveToken(token, sq);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay between steps
     }
   }
 

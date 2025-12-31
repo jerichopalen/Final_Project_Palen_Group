@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Snakes & Ladders Game - Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 1000px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 60px;
+            min-height: 600px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Slide 1 - Title */
+        .slide-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .slide-1 h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide-1 .emoji {
+            font-size: 5em;
+            margin: 20px 0;
+        }
+
+        .slide-1 p {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        /* Slide 2 - Project Overview */
+        .slide-2 {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+        }
+
+        .slide-2 h2 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .feature-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Slide 3 - Tech Stack */
+        .slide-3 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .slide-3 h2 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-card .tech-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .tech-card h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .tech-card p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        /* Slide 4 - Gameplay */
+        .slide-4 {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .slide-4 h2 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .gameplay-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0 auto 10px;
+        }
+
+        .step h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .step p {
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        .arrow {
+            color: #667eea;
+            font-size: 2em;
+            margin: 0 10px;
+        }
+
+        /* Slide 5 - Team Roles */
+        .slide-5 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .slide-5 h2 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-top: 4px solid #667eea;
+        }
+
+        .team-member.leader {
+            border-top-color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        .member-avatar {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .member-name {
+            color: #333;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .member-tasks {
+            color: #555;
+            font-size: 0.85em;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .member-tasks li {
+            margin-left: 20px;
+        }
+
+        /* Slide 6 - Architecture */
+        .slide-6 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .slide-6 h2 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .architecture {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .arch-box {
+            background: #f0f0f0;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+
+        .arch-box h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .arch-box p {
+            color: #555;
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        /* Slide 7 - Results */
+        .slide-7 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .slide-7 h2 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .result-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .result-card ul {
+            list-style: none;
+            color: #555;
+        }
+
+        .result-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-card li:before {
+            content: "✓ ";
+            color: #43e97b;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* Slide 8 - Closing */
+        .slide-8 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .slide-8 h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .slide-8 .emoji {
+            font-size: 4em;
+            margin: 20px 0;
+        }
+
+        .slide-8 p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        /* Navigation */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: #333;
+            color: white;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-indicator {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #ffd700;
+            transform: scale(1.3);
+        }
+
+        .slide-counter {
+            font-size: 0.9em;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+                min-height: auto;
+            }
+
+            .slide-1 h1 {
+                font-size: 2.5em;
+            }
+
+            .features-grid, .team-members {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gameplay-steps {
+                flex-wrap: wrap;
+            }
+
+            .controls {
+                padding: 15px 30px;
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-1 active">
+            <div class="emoji">🎲</div>
+            <h1>3D Snakes & Ladders Game</h1>
+            <p>An Interactive WebGL Experience</p>
+            <p style="font-size: 1.1em; margin-top: 40px; opacity: 0.9;">Final Project Presentation</p>
+            <p style="font-size: 1em; margin-top: 20px; opacity: 0.8;">PALEN Group | December 2025</p>
+        </div>
+
+        <!-- Slide 2: Project Overview -->
+        <div class="slide slide-2">
+            <h2>🎯 Project Overview</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🌟 3D Graphics</h3>
+                    <p>Beautiful 3D board with interactive squares using Three.js and WebGL</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Smooth Animations</h3>
+                    <p>Step-by-step token movement with bounce-back mechanics</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎮 Multiplayer</h3>
+                    <p>Support for 2-4 players with custom names and positions</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔊 Sound Effects</h3>
+                    <p>Audio feedback for dice rolls, snakes, ladders, and victory</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 Responsive</h3>
+                    <p>Works seamlessly on desktop and mobile devices</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🚀 Production Ready</h3>
+                    <p>Deployed on Vercel with optimized performance</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Tech Stack -->
+        <div class="slide slide-3">
+            <h2>⚙️ Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🎨</div>
+                    <h3>Three.js</h3>
+                    <p>3D graphics library for WebGL rendering</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">⚡</div>
+                    <h3>Vite</h3>
+                    <p>Lightning-fast build tool and dev server</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📦</div>
+                    <h3>ES Modules</h3>
+                    <p>Modern JavaScript modular architecture</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🎵</div>
+                    <h3>Web Audio API</h3>
+                    <p>Dynamic sound effects and audio management</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🎯</div>
+                    <h3>JavaScript</h3>
+                    <p>ES6+ for game logic and interactions</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🌐</div>
+                    <h3>Vercel</h3>
+                    <p>Cloud deployment and hosting platform</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Gameplay -->
+        <div class="slide slide-4">
+            <h2>🎮 How to Play</h2>
+            <div class="gameplay-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Setup</h3>
+                    <p>Choose player count & enter names</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Roll</h3>
+                    <p>Click "Roll Dice" button</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Move</h3>
+                    <p>Watch smooth animations</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Effect</h3>
+                    <p>Snake/Ladder interaction</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Win</h3>
+                    <p>Reach 100 first!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Team Roles -->
+        <div class="slide slide-5">
+            <h2>👥 Team & Responsibilities</h2>
+            <div class="team-members">
+                <div class="team-member leader">
+                    <div class="member-avatar">👨‍💼</div>
+                    <div class="member-name">PALEN</div>
+                    <div class="member-role">🏆 Project Leader</div>
+                    <ul class="member-tasks">
+                        <li>Project management</li>
+                        <li>Game logic (Game.js)</li>
+                        <li>State management</li>
+                        <li>Vercel deployment</li>
+                        <li>Component integration</li>
+                    </ul>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">🎨</div>
+                    <div class="member-name">MATCHICA DAVE</div>
+                    <div class="member-role">3D Graphics Expert</div>
+                    <ul class="member-tasks">
+                        <li>Three.js setup</li>
+                        <li>3D board creation</li>
+                        <li>Token animations</li>
+                        <li>Snake/Ladder effects</li>
+                        <li>Camera/Lighting</li>
+                    </ul>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">🎯</div>
+                    <div class="member-name">BONGCAC</div>
+                    <div class="member-role">Frontend & Audio</div>
+                    <ul class="member-tasks">
+                        <li>UI/UX design</li>
+                        <li>HTML structure</li>
+                        <li>CSS styling</li>
+                        <li>Sound manager</li>
+                        <li>Event handling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Architecture -->
+        <div class="slide slide-6">
+            <h2>🏗️ Technical Architecture</h2>
+            <div class="architecture">
+                <div class="arch-box">
+                    <h3>📄 main.js</h3>
+                    <p>• Event handling and game flow control</p>
+                    <p>• Dice rolling and player turn management</p>
+                    <p>• Animation orchestration and token movement</p>
+                </div>
+                <div class="arch-box">
+                    <h3>🎮 Game.js</h3>
+                    <p>• Player position tracking</p>
+                    <p>• Snake and ladder mechanics</p>
+                    <p>• Game state and win condition</p>
+                </div>
+                <div class="arch-box">
+                    <h3>🎨 Scene3D.js</h3>
+                    <p>• Three.js scene management</p>
+                    <p>• 3D board and token rendering</p>
+                    <p>• Smooth animation system</p>
+                </div>
+                <div class="arch-box">
+                    <h3>🔊 SoundManager.js</h3>
+                    <p>• Web Audio API integration</p>
+                    <p>• Sound effect playback</p>
+                    <p>• Audio state management</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Results & Features -->
+        <div class="slide slide-7">
+            <h2>✨ Key Achievements</h2>
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3>🎯 Core Features</h3>
+                    <ul>
+                        <li>3D interactive game board</li>
+                        <li>Multi-player support (2-4)</li>
+                        <li>Step-by-step animations</li>
+                        <li>Bounce-back mechanics</li>
+                        <li>Snake & ladder effects</li>
+                    </ul>
+                </div>
+                <div class="result-card">
+                    <h3>🚀 Technical Excellence</h3>
+                    <ul>
+                        <li>WebGL 3D graphics</li>
+                        <li>Responsive design</li>
+                        <li>Sound effects system</li>
+                        <li>Async animation handling</li>
+                        <li>Production deployment</li>
+                    </ul>
+                </div>
+                <div class="result-card">
+                    <h3>💡 Innovation</h3>
+                    <ul>
+                        <li>Modern build tools (Vite)</li>
+                        <li>ES modules architecture</li>
+                        <li>Smooth animations</li>
+                        <li>Interactive UI/UX</li>
+                        <li>Scalable codebase</li>
+                    </ul>
+                </div>
+                <div class="result-card">
+                    <h3>🎓 Learning Impact</h3>
+                    <ul>
+                        <li>Full-stack web dev</li>
+                        <li>3D game development</li>
+                        <li>Team collaboration</li>
+                        <li>Project deployment</li>
+                        <li>Professional practices</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Closing -->
+        <div class="slide slide-8">
+            <div class="emoji">🎉</div>
+            <h2>Thank You!</h2>
+            <p>3D Snakes & Ladders Game</p>
+            <p style="font-size: 1.1em; margin-top: 30px;">Live Demo: <strong>final-project-palen-group.vercel.app</strong></p>
+            <p style="margin-top: 20px; opacity: 0.9;">GitHub: jerichopalen/Final_Project_Palen_Group</p>
+            <p style="margin-top: 40px; opacity: 0.8;">Questions?</p>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="controls">
+            <button class="btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+            <div class="slide-indicator">
+                <div class="dot active" onclick="currentSlide(1)"></div>
+                <div class="dot" onclick="currentSlide(2)"></div>
+                <div class="dot" onclick="currentSlide(3)"></div>
+                <div class="dot" onclick="currentSlide(4)"></div>
+                <div class="dot" onclick="currentSlide(5)"></div>
+                <div class="dot" onclick="currentSlide(6)"></div>
+                <div class="dot" onclick="currentSlide(7)"></div>
+                <div class="dot" onclick="currentSlide(8)"></div>
+            </div>
+            <div class="slide-counter"><span id="slideNum">1</span> / 8</div>
+            <button class="btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlideNum = 1;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+
+            if (n > slides.length) currentSlideNum = slides.length;
+            if (n < 1) currentSlideNum = 1;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[currentSlideNum - 1].classList.add('active');
+            dots[currentSlideNum - 1].classList.add('active');
+
+            document.getElementById('slideNum').textContent = currentSlideNum;
+            document.getElementById('prevBtn').disabled = currentSlideNum === 1;
+            document.getElementById('nextBtn').disabled = currentSlideNum === slides.length;
+        }
+
+        function changeSlide(n) {
+            currentSlideNum += n;
+            showSlide(currentSlideNum);
+        }
+
+        function currentSlide(n) {
+            currentSlideNum = n;
+            showSlide(currentSlideNum);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Initialize
+        showSlide(currentSlideNum);
+    </script>
+</body>
+</html>
