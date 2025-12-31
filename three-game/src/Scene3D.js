@@ -493,7 +493,7 @@ export class Scene3D {
         
         const fromPos = token.position.clone();
         const targetPos = this.getSquarePosition(currentMoveSquare);
-        targetPos.z = 0.2;
+        targetPos.z = 0.4;
 
         // Animate this single square movement
         await new Promise((stepResolve) => {
@@ -511,7 +511,7 @@ export class Scene3D {
 
             token.position.x = fromPos.x + (targetPos.x - fromPos.x) * easeProgress;
             token.position.y = fromPos.y + (targetPos.y - fromPos.y) * easeProgress;
-            token.position.z = 0.2 + Math.sin(progress * Math.PI) * 0.1;
+            token.position.z = 0.4 + Math.sin(progress * Math.PI) * 0.1;
 
             if (progress >= 1) {
               token.position.copy(targetPos);

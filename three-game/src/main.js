@@ -83,7 +83,7 @@ function updateTokenPositions() {
     
     token.position.x = tokenX;
     token.position.y = tokenY;
-    token.position.z = 0.2;
+    token.position.z = 0.4;
   }
 }
 
