@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Snakes and Ladders Game</title>
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body>
+    <canvas class="webgl"></canvas>
+    
+    <!-- Game Setup Panel (Top Right) -->
+    <div class="setup-panel" id="setupPanel">
+      <button class="reset-button" onclick="showSetup()">🔄 New Game</button>
+      <div class="setup-content" id="setupContent" style="display: none;">
+        <h3>Game Setup</h3>
+        <div class="form-group">
+          <label>Number of Players:</label>
+          <select id="playerCount" onchange="updatePlayerInputs()">
+            <option value="2">2 Players</option>
+            <option value="3">3 Players</option>
+            <option value="4">4 Players</option>
+          </select>
+        </div>
+        <div id="playerNamesContainer"></div>
+        <button class="start-game-button" onclick="startGame()">Start Game</button>
+      </div>
+    </div>
+    
+    <!-- Game UI -->
+    <div class="ui" id="gameUI">
+      <h2>🎲 Snakes & Ladders</h2>
+      <div id="playersContainer"></div>
+      <button class="dice-button" id="rollButton" onclick="rollDice()">🎲 Roll Dice</button>
+      <div class="dice-result" id="diceResult">
+        <p>Dice Roll: <span id="diceValue">-</span></p>
+      </div>
+      <div class="game-status" id="gameStatus"></div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+      <h3>How to Play</h3>
+      <p>🎲 Click "Roll Dice" to move</p>
+      <p>🪜 Climb ladders (green) ⬆️</p>
+      <p>🐍 Avoid snakes (red) ⬇️</p>
+      <p>🏆 First to reach 100 wins!</p>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+
+    <!-- Winner Modal Pop-up -->
+    <div class="winner-modal" id="winnerModal">
+      <div class="winner-content">
+        <div class="winner-icon">🏆</div>
+        <h1 id="winnerText">Player 1 WINS!</h1>
+        <p class="winner-message">Congratulations!</p>
+        <button class="winner-button" onclick="resetGame()">Play Again</button>
+      </div>
+    </div>
+  </body>
+</html>
